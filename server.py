@@ -28,16 +28,18 @@ def load_vocabulary():
 
 
 def load_lyrics_corpus(engine: PhoneticEngine):
-    """Index lyrics lines by phonetic suffix for verse-level matching."""
-    lines_d2 = defaultdict(list)
-    lines_d1 = defaultdict(list)
+    """Index lyrics lines by their last word for lookup."""
+    # last_word_normalized -> [line, ...]
+    lines_by_word = defaultdict(list)
+    # tail_d2 -> [line, ...]
+    lines_by_d2 = defaultdict(list)
     all_lines = []
 
     try:
         with open("lyrics_corrected.txt", "r", encoding="utf-8") as f:
             raw = f.readlines()
     except FileNotFoundError:
-        return lines_d2, lines_d1, all_lines
+        return lines_by_word, lines_by_d2, all_lines
 
     skip = re.compile(r'^\s*$|^\[|^#|^-{3,}|^\(|^Style:|^End|^Fade|^Finish')
 
@@ -55,17 +57,17 @@ def load_lyrics_corpus(engine: PhoneticEngine):
             continue
 
         entry = engine.build_entry(last_word)
-        lines_d2[entry.tail_d2].append(line_clean)
-        lines_d1[entry.tail_d1].append(line_clean)
+        lines_by_word[last_word].append(line_clean)
+        lines_by_d2[entry.tail_d2].append(line_clean)
         all_lines.append(line_clean)
 
-    return lines_d2, lines_d1, all_lines
+    return lines_by_word, lines_by_d2, all_lines
 
 
 # --- Initialize ---
 VOCABULARY = load_vocabulary()
 engine = PhoneticEngine(VOCABULARY)
-LINES_D2, LINES_D1, ALL_LINES = load_lyrics_corpus(engine)
+LINES_BY_WORD, LINES_BY_D2, ALL_LINES = load_lyrics_corpus(engine)
 print(f"📚 Indexed {len(ALL_LINES)} verse lines from lyrics corpus")
 
 
@@ -87,37 +89,50 @@ class VerseSuggestion(BaseModel):
 class GenerationResponse(BaseModel):
     mode: str  # "word" or "verse"
     original_word: str
-    # Word mode
     words: Optional[Dict[str, List[WordSuggestion]]] = None
-    # Verse mode
     verses: Optional[Dict[str, VerseSuggestion]] = None
 
 
-def find_verse_suggestion(target_entry, seen_set: set, input_line: str):
-    """Find one rhyming verse line from corpus, avoiding seen and input."""
+def find_rhyming_verse(target_word: str, seen_set: set, input_line: str):
+    """
+    Find a corpus line that genuinely rhymes with target_word.
+    Strategy:
+      1. Direct d2 (multi-syllable suffix) lookup in corpus index
+      2. Use word engine to find rhyming words, then find corpus lines ending with them
+    Only returns lines where the last word has matching tail_d2 (real rhyme).
+    """
+    target_entry = engine.build_entry(target_word)
     input_lower = input_line.lower().strip()
 
-    # Try d2 (perfect match) first, then d1 (near)
-    candidates = list(LINES_D2.get(target_entry.tail_d2, []))
-    candidates += [l for l in LINES_D1.get(target_entry.tail_d1, [])
-                   if l not in candidates]
+    # --- Strategy 1: Direct corpus d2 lookup ---
+    d2_candidates = list(LINES_BY_D2.get(target_entry.tail_d2, []))
+    random.shuffle(d2_candidates)
 
-    # Shuffle for variety
-    random.shuffle(candidates)
-
-    for line in candidates:
-        if line in seen_set and line.lower().strip() != input_lower:
-            continue
+    for line in d2_candidates:
         if line.lower().strip() == input_lower:
             continue
         if line in seen_set:
             continue
         rw = re.sub(r'[^\w]', '', line.split()[-1].lower())
-        # Calculate score
-        rw_entry = engine.build_entry(rw)
-        is_d2 = rw_entry.tail_d2 == target_entry.tail_d2
-        score = engine.score(target_entry, rw_entry, is_d2)
-        return VerseSuggestion(line=line, rhyme_word=rw, score=score)
+        if rw == target_word:
+            continue  # don't suggest same word
+        return VerseSuggestion(line=line, rhyme_word=rw, score=1.0)
+
+    # --- Strategy 2: Find rhyming words from dictionary, then match to corpus ---
+    rhyming_words = engine.find_candidates(target_word)
+    # Only use PERFECT matches (d2 match = real rhyme)
+    perfect_words = [w for w, grade, score in rhyming_words if grade == "PERFECT"]
+    random.shuffle(perfect_words)
+
+    for rw in perfect_words:
+        corpus_lines = LINES_BY_WORD.get(rw, [])
+        random.shuffle(corpus_lines)
+        for line in corpus_lines:
+            if line.lower().strip() == input_lower:
+                continue
+            if line in seen_set:
+                continue
+            return VerseSuggestion(line=line, rhyme_word=rw, score=0.9)
 
     return None
 
@@ -133,35 +148,25 @@ async def generate_rhymes(request: GenerationRequest):
     is_single_word = len(words) == 1
 
     target_word = re.sub(r'[^\w]', '', words[-1].lower())
-    target_entry = engine.build_entry(target_word)
 
     if is_single_word:
-        # --- WORD MODE: return rhyming words ---
+        # --- WORD MODE ---
         raw_results = engine.find_candidates(target_word)
         payload = {"PERFECT": [], "DOMINANT": [], "NEAR": []}
         for word, grade, score in raw_results:
             if len(payload[grade]) < 10:
                 payload[grade].append(WordSuggestion(word=word, grade=grade, score=score))
+        return GenerationResponse(mode="word", original_word=target_word, words=payload)
 
-        return GenerationResponse(
-            mode="word",
-            original_word=target_word,
-            words=payload
-        )
     else:
-        # --- VERSE MODE: one suggestion per rhyme scheme ---
+        # --- VERSE MODE: one genuine rhyme per scheme ---
         verses = {}
         for scheme in ["AABB", "ABAB", "ABBA"]:
-            suggestion = find_verse_suggestion(target_entry, seen_set, text)
+            suggestion = find_rhyming_verse(target_word, seen_set, text)
             if suggestion:
-                seen_set.add(suggestion.line)  # don't reuse across schemes
+                seen_set.add(suggestion.line)
                 verses[scheme] = suggestion
-
-        return GenerationResponse(
-            mode="verse",
-            original_word=target_word,
-            verses=verses
-        )
+        return GenerationResponse(mode="verse", original_word=target_word, verses=verses)
 
 
 if __name__ == "__main__":
