@@ -35,6 +35,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+async def health_check():
+    return {"status": "online", "engine": "PhoneticEngine", "corpus_size": len(ALL_LINES)}
+
 # --- Junk filter for word-mode results ---
 JUNK_RE = re.compile(r'[-.]|^[a-z]{1,3}-|^\w+-\w+$')
 
