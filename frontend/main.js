@@ -15,6 +15,9 @@ const lists = {
     NEAR: document.getElementById('near-list')
 };
 
+// Track seen lines to avoid repeats
+let seenLines = [];
+
 // --- Status banner ---
 const statusBanner = document.createElement('div');
 statusBanner.id = 'status-banner';
@@ -68,6 +71,7 @@ async function generate() {
     if (!verse) return;
 
     generateBtn.disabled = true;
+    generateBtn.textContent = '⟳ Generating...';
     loadingIndicator.style.display = 'block';
     resultsArea.classList.remove('visible');
 
@@ -75,25 +79,30 @@ async function generate() {
         const response = await fetchWithRetry(`${API_URL}/generate`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ verse })
+            body: JSON.stringify({ verse, seen: seenLines })
         });
 
         const data = await response.json();
-        renderResults(data.suggestions);
+        renderResults(data);
         showStatus('✓ Generated', 'success');
     } catch (error) {
         console.error(error);
         showStatus('Backend offline — start server.py on :8000, then try again', 'error');
     } finally {
         generateBtn.disabled = false;
+        generateBtn.textContent = 'Generate Magic';
         loadingIndicator.style.display = 'none';
     }
 }
 
-function renderResults(suggestions) {
+function renderResults(data) {
+    const { suggestions, original_word, original_verse } = data;
+
     Object.keys(lists).forEach(key => {
         if (lists[key]) lists[key].innerHTML = '';
     });
+
+    let hasResults = false;
 
     Object.keys(suggestions).forEach(grade => {
         const container = lists[grade];
@@ -101,28 +110,43 @@ function renderResults(suggestions) {
 
         const items = suggestions[grade];
         if (items.length === 0) {
-            container.innerHTML = '<div class="empty-state">No matches found</div>';
+            container.innerHTML = '<div class="empty-state">No verse matches</div>';
             return;
         }
 
+        hasResults = true;
+
         items.forEach(item => {
+            // Track this line so it won't repeat
+            seenLines.push(item.line);
+
             const card = document.createElement('div');
             card.className = 'stanza-card';
 
+            // Highlight the rhyming word at the end
+            const lineWords = item.line.split(' ');
+            const lastWord = lineWords.pop();
+            const lineStart = lineWords.join(' ');
+
             card.innerHTML = `
                 <div class="stanza-content">
-                    <div class="stanza-line rhyme-line">${item.word}</div>
+                    <div class="stanza-line verse-line">${lineStart} <span class="rhyme-highlight">${lastWord}</span></div>
                 </div>
                 <div class="stanza-meta">
-                    <span class="badge">${item.grade}</span>
-                    <span class="score">${Math.round(item.score * 100)}% Match</span>
+                    <span class="badge badge-${grade.toLowerCase()}">${grade}</span>
+                    <span class="score">${Math.round(item.score * 100)}%</span>
                 </div>
             `;
 
             card.addEventListener('click', () => {
-                navigator.clipboard.writeText(item.word).then(() => {
+                navigator.clipboard.writeText(item.line).then(() => {
                     card.classList.add('copied');
-                    setTimeout(() => card.classList.remove('copied'), 400);
+                    const orig = card.querySelector('.stanza-meta .score');
+                    if (orig) { orig.textContent = '✓ Copied!'; }
+                    setTimeout(() => {
+                        card.classList.remove('copied');
+                        if (orig) { orig.textContent = `${Math.round(item.score * 100)}%`; }
+                    }, 800);
                 });
             });
 
@@ -130,8 +154,25 @@ function renderResults(suggestions) {
         });
     });
 
+    if (!hasResults) {
+        lists.PERFECT.innerHTML = '<div class="empty-state">No matching verses found in corpus. Try a different line.</div>';
+    }
+
     resultsArea.classList.add('visible');
 }
+
+// Reset seen lines when input changes significantly
+let lastVerse = '';
+verseInput.addEventListener('input', () => {
+    const current = verseInput.value.trim();
+    // If the last word changed, reset seen
+    const currLast = current.split(/\s+/).pop()?.toLowerCase() || '';
+    const prevLast = lastVerse.split(/\s+/).pop()?.toLowerCase() || '';
+    if (currLast !== prevLast) {
+        seenLines = [];
+    }
+    lastVerse = current;
+});
 
 generateBtn.addEventListener('click', generate);
 
@@ -141,5 +182,4 @@ verseInput.addEventListener('keydown', (e) => {
     }
 });
 
-// Check backend on page load
 checkBackend();

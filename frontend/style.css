@@ -252,6 +252,36 @@ button:disabled {
   display: inline-block;
 }
 
+.stanza-line.verse-line {
+  color: var(--color-text-primary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.rhyme-highlight {
+  color: var(--color-accent);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent-glow);
+  text-underline-offset: 3px;
+}
+
+.badge-perfect {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+
+.badge-dominant {
+  background: var(--color-accent-dim);
+  color: var(--color-accent);
+}
+
+.badge-near {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+}
+
 .stanza-meta {
   margin-top: var(--space-md);
   display: flex;
