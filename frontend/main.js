@@ -1,5 +1,9 @@
 import './style.css'
 
+const API_URL = 'http://localhost:8000';
+const MAX_RETRIES = 3;
+const RETRY_DELAY = 1500;
+
 const generateBtn = document.getElementById('generate-btn');
 const verseInput = document.getElementById('verse-input');
 const resultsArea = document.getElementById('results');
@@ -11,6 +15,54 @@ const lists = {
     NEAR: document.getElementById('near-list')
 };
 
+// --- Status banner ---
+const statusBanner = document.createElement('div');
+statusBanner.id = 'status-banner';
+statusBanner.style.cssText = 'display:none;padding:10px 20px;text-align:center;font-size:13px;font-weight:600;position:fixed;top:0;left:0;right:0;z-index:999;transition:all 0.3s ease;';
+document.body.prepend(statusBanner);
+
+function showStatus(msg, type = 'error') {
+    statusBanner.textContent = msg;
+    statusBanner.style.display = 'block';
+    statusBanner.style.background = type === 'error' ? '#ff4444' : type === 'warn' ? '#ff8800' : '#22cc66';
+    statusBanner.style.color = '#fff';
+    if (type !== 'error') {
+        setTimeout(() => { statusBanner.style.display = 'none'; }, 3000);
+    }
+}
+
+function hideStatus() {
+    statusBanner.style.display = 'none';
+}
+
+// --- Fetch with retry ---
+async function fetchWithRetry(url, options, retries = MAX_RETRIES) {
+    for (let attempt = 1; attempt <= retries; attempt++) {
+        try {
+            const response = await fetch(url, options);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            hideStatus();
+            return response;
+        } catch (err) {
+            if (attempt < retries) {
+                showStatus(`Backend unreachable — retry ${attempt}/${retries - 1}...`, 'warn');
+                await new Promise(r => setTimeout(r, RETRY_DELAY * attempt));
+            } else {
+                throw err;
+            }
+        }
+    }
+}
+
+// --- Health check on load ---
+async function checkBackend() {
+    try {
+        await fetch(`${API_URL}/docs`, { method: 'HEAD', mode: 'no-cors' });
+    } catch {
+        showStatus('⚠ Backend offline — start server.py on :8000', 'error');
+    }
+}
+
 async function generate() {
     const verse = verseInput.value.trim();
     if (!verse) return;
@@ -20,19 +72,18 @@ async function generate() {
     resultsArea.classList.remove('visible');
 
     try {
-        const response = await fetch('http://localhost:8000/generate', {
+        const response = await fetchWithRetry(`${API_URL}/generate`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ verse })
         });
 
-        if (!response.ok) throw new Error('API Error');
-
         const data = await response.json();
         renderResults(data.suggestions);
+        showStatus('✓ Generated', 'success');
     } catch (error) {
         console.error(error);
-        alert('Failed to generate rhymes. Ensure backend is running at :8000');
+        showStatus('Backend offline — start server.py on :8000, then try again', 'error');
     } finally {
         generateBtn.disabled = false;
         loadingIndicator.style.display = 'none';
@@ -40,7 +91,6 @@ async function generate() {
 }
 
 function renderResults(suggestions) {
-    // Clear lists
     Object.keys(lists).forEach(key => {
         if (lists[key]) lists[key].innerHTML = '';
     });
@@ -90,3 +140,6 @@ verseInput.addEventListener('keydown', (e) => {
         generate();
     }
 });
+
+// Check backend on page load
+checkBackend();
