@@ -90,11 +90,8 @@ class PhoneticEngine:
     def find_candidates(self, target_word):
         target = self.build_entry(target_word)
         
-        # Tier 1: Multi-syllabic exact match
+        # Tier 1: Multi-syllabic exact match (real rhymes)
         perfect = self.index_d2.get(target.tail_d2, [])
-        
-        # Tier 2: Single-vowel exact match (filter out those already in perfect)
-        near_candidates = self.index_d1.get(target.tail_d1, [])
         
         # Filter and score 
         results = []
@@ -105,13 +102,17 @@ class PhoneticEngine:
             score = self.score(target, cand, True)
             results.append((cand.original, "PERFECT", score))
             seen.add(cand.original)
-            
-        for cand in near_candidates:
-            if cand.original in seen: continue
-            score = self.score(target, cand, False)
-            grade = "DOMINANT" if score > 0.7 else "NEAR"
-            results.append((cand.original, grade, score))
-            seen.add(cand.original)
+
+        # Tier 2: Single-vowel match — ONLY if suffix is meaningful (3+ chars)
+        # A 1-2 char tail like "o" or "em" matches thousands of unrelated words
+        if len(target.tail_d1) >= 3:
+            near_candidates = self.index_d1.get(target.tail_d1, [])
+            for cand in near_candidates:
+                if cand.original in seen: continue
+                score = self.score(target, cand, False)
+                grade = "DOMINANT" if score > 0.7 else "NEAR"
+                results.append((cand.original, grade, score))
+                seen.add(cand.original)
             
         return sorted(results, key=lambda x: x[2], reverse=True)
 
