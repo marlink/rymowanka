@@ -1,0 +1,489 @@
+{
+    "AABB": [
+        [
+            "Ciemna dolina śpi w gęstym lesie",
+            "Echo piosenkę z oddali niesie",
+            "Gwiazdy migoczą wysoko w górze",
+            "Marzą o ciszy i o naturze"
+        ],
+        [
+            "Kot na kanapie cicho pilnuje",
+            "Myszka pod stołem już to czuje",
+            "Miseczka z mlekiem stoi przy ścianie",
+            "Czeka cierpliwie na swe śniadanie"
+        ],
+        [
+            "Zima okryła mrozem jezioro",
+            "Pracy i trudu będzie tu sporo",
+            "Ogień w kominku wesoło płonie",
+            "Ciepło ogrzewa zmarznięte dłonie"
+        ],
+        [
+            "Rycerz na koniu mknie po poranku",
+            "Złoto zostawił w pięknym dzbanku",
+            "Miecz jego błyszczy w jasnym słońcu",
+            "Wróci do domu pewnie w końcu"
+        ],
+        [
+            "Szumiąca fala brzegi całuje",
+            "Rybak od rana morze miłuje",
+            "Skarby głębiny w sieć swą zaplata",
+            "Wędrując wiernie na krańce świata"
+        ],
+        [
+            "Złoty skarb słońca blaskiem nas wita",
+            "Każda godzina w szczęście obfita",
+            "W polu szerokim zboże dojrzewa",
+            "Wiatr o radości cicho nam śpiewa"
+        ],
+        [
+            "W starym ogrodzie dąb dumnie stoi",
+            "Żadnej wichury on się nie boi",
+            "Ptaki w koronie gniazda budują",
+            "Dzieci pod dębem chętnie ucztują"
+        ],
+        [
+            "Biały obłoku płyniesz po niebie",
+            "Szukam nadziei patrząc na ciebie",
+            "Woda w jeziorze cicho tak ścieka",
+            "Bo ona zawsze szybko ucieka"
+        ],
+        [
+            "Mała dziewczynka lalkę przytula",
+            "W oknie wieczorem śpiewa jej lula",
+            "Marzy o bajkach i o przygodzie",
+            "Goniąc motyle w pięknym ogrodzie"
+        ],
+        [
+            "Srebrny strumieniu mkniesz po kamieniach",
+            "O swych radosnych mówisz wspomnieniach",
+            "Woda twa czysta blaskiem migocze",
+            "W lesie gdzie słońce budzi roztocze"
+        ],
+        [
+            "Raper ulica miasto to beton",
+            "W ręku trzymam ten cenny żeton",
+            "Każdy tu walczy o swoje pliki",
+            "Nie słychać wcale dobrej muzyki"
+        ],
+        [
+            "Sieć mnie pochłania każdego ranka",
+            "Stoję na brzegu jak ta wybranka",
+            "Scrolluję życie palcem po szkle",
+            "Widzę w odbiciu wszystko co złe"
+        ],
+        [
+            "Dziś sztuczna inteligencja myśli",
+            "Co się jutro ludziom przyśni",
+            "Kod pisze wiersze zamiast poety",
+            "Takie są właśnie krwawe zalety"
+        ],
+        [
+            "Stoję na blokach widzę te cienie",
+            "Wszyscy tu mają swoje marzenie",
+            "Lecz rzeczywistość twarda jest wielce",
+            "Zamyka nas w tej szklanej butelce"
+        ],
+        [
+            "Kredyt na życie pętla na szyi",
+            "Każdy chce wierzyć że wciąż tu żyje",
+            "Praca od świtu aż do wieczora",
+            "To jest dzisiejsza ludzka pokora"
+        ],
+        [
+            "Fejkowe newsy leją się zewsząd",
+            "Prawdy w tym ścieku nikt nie oszczędzą",
+            "Wierzysz w to wszystko co ci podają",
+            "Choć tak naprawdę cię okłamują"
+        ],
+        [
+            "Blockchain i krypto wielka nadzieja",
+            "Lecz to dla wielu jest beznadzieja",
+            "Wykres czerwony spada na dno",
+            "Znowu w kieszeni masz tylko zło"
+        ],
+        [
+            "Matka samotna dzieci swe chowa",
+            "Twarda i mocna jest jej o zmowa",
+            "Walczy z systemem każdego dnia",
+            "W oczach jej błyszczy ta gorzka łza"
+        ],
+        [
+            "Wirtualny świat to nasza zguba",
+            "Każda relacja to tylko próba",
+            "Lajki i serca zamiast rozmowy",
+            "To jest początek nowej budowy"
+        ],
+        [
+            "Betonowe dżungle rosną do nieba",
+            "Więcej przestrzeni nam dzisiaj trzeba",
+            "Drzewa znikają pod ciężkim butem",
+            "Świat się staje jednym wielkim drutem"
+        ],
+        [
+            "Wieczorem scrolluję tindera znów",
+            "Match po matchu to tylko show",
+            "Nikt nie odpisuje to rutyna",
+            "Samotność cyfrowa każdego mina"
+        ],
+        [
+            "Gaming w nocy do białego rana",
+            "Realny świat to tylko taka drama",
+            "W grze jestem królem mam wszystko tu",
+            "Ale w prawdziwym życiu tylko czuję puls"
+        ],
+        [
+            "Pokolenie wypalone już w szkole",
+            "Dwadzieścia lat a czują się w bólu",
+            "Hajs praca stres to nasze motta",
+            "Depresja młodych to już norma hol",
+            "ta"
+        ],
+        [
+            "Matka mówi synku idź na studia",
+            "Ale szkoła uczy tylko jak być w pudła",
+            "Nie mówią o pasjach o marzeniach",
+            "Tylko o tym jak siedzieć w cieniach"
+        ],
+        [
+            "Związek trwał tylko trzy krótkie miesiące",
+            "Ona chce lajków a ja prawdy w duszy",
+            "Teraz sam siedzę w pustym mieszkaniu",
+            "Patrzę na zdjęcia w tym ciągłym gnaniu"
+        ],
+        [
+            "Wszyscy chcą być gwiazdami na sieci",
+            "Nagrywać vlogi dla swoich widziecień",
+            "Ale prawda jest że to ciężki hajs",
+            "Większość odpada to nie jest szajs"
+        ],
+        [
+            "U terapeuty siedzę co tydzień",
+            "Opowiadam mu o moich kłopotach w świecie",
+            "Ale społeczeństwo mówi bądź twardy",
+            "Nie pokazuj słabości to są karty"
+        ],
+        [
+            "Kumple mówili że są na zawsze",
+            "Ale gdy spadłem zniknęli w mgnieniu od razu",
+            "Prawdziwa twarz wychodzi w kryzysie",
+            "Sam zostajesz w tym całym biznesie"
+        ],
+        [
+            "Krypto spadło o połowę w noc",
+            "Myślałem że to inwestycja na wieki moc",
+            "Teraz portfel pusty marzenia spalą",
+            "Bitcoin to była bańka wielką znowu ścią"
+        ],
+        [
+            "Rodzice nie rozumieją mojego rapu",
+            "Mówią że to hałas nie ma w tym sztuki fapu",
+            "Ale to mój sposób żeby przetrwać",
+            "W świecie który chce mnie zatrzymać"
+        ],
+        [
+            "Fast food codziennie zamiast gotować",
+            "Zdrowie schodzi ale nie ma czasu dłużej stać",
+            "Wszystko na szybko w tym pędzie życia",
+            "Nie ma miejsca na zdrową żywicą"
+        ],
+        [
+            "Każda lekcja nudna jak diabli",
+            "Uczą historii co nie ma w życiu prawdy",
+            "Rynek wymaga innych umiejętności",
+            "Szkoła daje dyplom bez użyteczności"
+        ],
+        [
+            "Influencerka sprzedaje mi krem na sieć",
+            "Tysiące lajków wierzą jej w tej grze",
+            "To tylko reklama za wielkie pieniądze",
+            "Prawda umarła w tym marketingowym świecie"
+        ],
+        [
+            "Mieszkam z rodzicami mam dwadzieścia lat",
+            "Wynajem to koszt którego nie stać brat",
+            "Ceny rosną pensja stoi w miejscu",
+            "Własne M2 to marzenie w bezczestiu"
+        ],
+        [
+            "Lęki nocne i ataki paniki",
+            "Nie śpię już dobrze to są me zwyki",
+            "Tabletki pomagają tylko przez chwilę dnia",
+            "Potem wraca ta sama wojna zimna"
+        ],
+        [
+            "Studiowałem kierunek bez perspektyw",
+            "Rodzice mówili że to przyszłość światów",
+            "Dyplom wisi na ścianie jak obraz",
+            "Pracuję w korpo za grosze w tym halas"
+        ],
+        [
+            "Social media to tylko wielki teatr",
+            "Każdy się uśmiecha choć w środku mrok i wiatr",
+            "Za kulisami płaczą sami w nocy",
+            "Ale rano znowu grają szczęśliwych mocy"
+        ],
+        [
+            "Ghosting to sposób na zakończenie",
+            "Nie piszę nie dzwonię to nowe myślenie",
+            "Po prostu znikam bez słowa pożegnania",
+            "Brak szacunku to trend tego pokolenia"
+        ],
+        [
+            "Pracuję na czarno za małe pieniądze",
+            "Szef się wzbogaca na mojej trudnej drodze",
+            "Kredyty rosną nie mam wyboru żadnego",
+            "Ta pętla niewoli trwa w życiu całego"
+        ],
+        [
+            "Każdą złotówkę liczę do końca dnia",
+            "Miesiąc się kończy a hajs ucieka zna",
+            "Ledwo wiążemy koniec z końcem życia",
+            "Wypłata ratuje nas jak boska szczytą"
+        ]
+    ],
+    "ABAB": [
+        [
+            "Góry wysokie słońcem spowite",
+            "Płynie potoku czysta woda",
+            "Szczyty skaliste w mgle ukryte",
+            "Każdemu szczytowi serca szkoda"
+        ],
+        [
+            "Deszcz pada cicho na szklane szyby",
+            "Zasypia miasto w szarym mroku",
+            "Płyną sny senne niczym te ryby",
+            "W każdym minionym życia kroku"
+        ],
+        [
+            "Książka otwarta leży na stole",
+            "Duchy przeszłości budzą się nocą",
+            "Zgasły nadzieje w dawnym mozole",
+            "Gwiazdy swym blaskiem drogę pozłocą"
+        ],
+        [
+            "Jesień maluje liście na biało",
+            "Ziemia się skryła pod gęstym błotem",
+            "Wszystko co żyje dzisiaj się bało",
+            "Lecąc nad nami wielkim samolotem"
+        ],
+        [
+            "Młodość ucieka niczym ta woda",
+            "Chwile radosne w pamięci giną",
+            "Przemija nagle każda uroda",
+            "Lata jak rzeka szybko odpłyną"
+        ],
+        [
+            "Wielkie to miasta tętnią od rana",
+            "Tłumy się spieszą w każdą stronę",
+            "Ziemia betonem mocno ubrana",
+            "Wkłada na głowę wielką koronę"
+        ],
+        [
+            "W cieniu dębowym ławka czekała",
+            "Starzy przyjaciele tam usiedli",
+            "Woda w strumieniu cicho szemrała",
+            "Zanim to śniadanie zaraz zjedli"
+        ],
+        [
+            "Ptaku niebieski leć ponad pola",
+            "Zanieś radosne dobre nowiny",
+            "Taka już twoja ptasia jest rola",
+            "Śpiewać dla całej naszej krainy"
+        ],
+        [
+            "Polne te kwiaty pachną tak miło",
+            "Pszczoły zbierają złoty nektar",
+            "Wszystko co dobre wczoraj ożyło",
+            "Idź i przynieś nam wielki hektar"
+        ],
+        [
+            "Góry wysokie nad nami rosną",
+            "Podróż daleka zaraz się zacznie",
+            "Bo one znów nad nami wyrosną",
+            "Jeśli to serce bije nam znacznie"
+        ],
+        [
+            "Dziś influencer sprzeda ci życie",
+            "Powie jak ubrać się bardzo modnie",
+            "Ale w tym całym swoim zachwycie",
+            "Zapomniał zmienić brudne spodnie"
+        ],
+        [
+            "Algorytm rządzi twoim wyborem",
+            "Podsuwa treści co mózg ci piorą",
+            "Stajesz się powoli tylko potworem",
+            "Jesteś już tylko cyfrową zmorą"
+        ],
+        [
+            "Walka o lajki to nowa wojna",
+            "Każdy chce błyszczeć na małym ekranie",
+            "Dusza nie może być już spokojna",
+            "Gdy hejt się wylewa na śniadanie"
+        ],
+        [
+            "Rap to jest prawda prosto z ulice",
+            "Mówi o bloku i o betonie",
+            "Patrzę na brudne te kamienice",
+            "Ogień w mym sercu już nie zapłonie"
+        ],
+        [
+            "Serwery huczą w wielkiej serwerowni",
+            "Tam nasze dane są składowane",
+            "Jesteśmy wszyscy tacy dosłowni",
+            "Choć nasze myśli są zaprzedane"
+        ],
+        [
+            "Samotność w sieci to nasza flaga",
+            "Mamy tysiące znajomych w chmurze",
+            "Lecz kiedy przyjdzie życiowa zniewaga",
+            "Zostajesz sam w tej betonowej rurze"
+        ],
+        [
+            "Praca zdalna to nowa cela",
+            "Siedzisz w piżamie przed monitorem",
+            "Nie masz już wcale swego przyjaciela",
+            "Jesteś dla firmy tylko potworem"
+        ],
+        [
+            "Klimat się zmienia płoną te lasy",
+            "A my wciąż patrzymy w zimne ekrany",
+            "To są te nasze nowoczesne czasy",
+            "Gdzie każdy z nas jest pokonany"
+        ],
+        [
+            "Depresja czai się w każdym kącie",
+            "Farmacja daje nam złote tabletki",
+            "Żyjesz w tym ciągłym i szybkim prądzie",
+            "Nosząc na barkach ciężkie walizki"
+        ],
+        [
+            "Wolność to słowo dawno zatarte",
+            "Mamy kamery na każdym rogu",
+            "Karty są dawno dzisiaj rozdarte",
+            "Nie ufaj swemu cyfrowemu bogu"
+        ]
+    ],
+    "ABBA": [
+        [
+            "Srebrzysty księżyc płynie nad polem",
+            "Gwiazdy na niebie cicho usnęły",
+            "Zegarowe sny już się zaczęły",
+            "Pachnie obiadem dziś pod tym stołem"
+        ],
+        [
+            "Cisza wieczorna spływa na chatę",
+            "Ogień powoli gaśnie w popiele",
+            "Gdzieś w oddaleniu słychać wesele",
+            "Zwiastując światu radosną datę"
+        ],
+        [
+            "Stara jabłoń swe gałęzie pochyla",
+            "Czerwień owoców w trawie się mieni",
+            "W ostatnim blasku ciepłej jesieni",
+            "Ucieka krótka radości chwila"
+        ],
+        [
+            "Gdy noc zapadnie nad wielką rzeką",
+            "Duchy zapomnieć chcą o swej karze",
+            "Wstają ze grobu biali żeglarze",
+            "Przed tą nieznaną wielką opieką"
+        ],
+        [
+            "Czas nas pogania w ciągłym biegu",
+            "Serce spragnione szuka wytchnienia",
+            "Każdy z nas pragnie tylko spełnienia",
+            "Niczym te ślady na świeżym śniegu"
+        ],
+        [
+            "Tajemny ogród czeka w ukryciu",
+            "Gdzie stare mury bluszczem porosły",
+            "Dziwne tam drzewa nagle wyrosły",
+            "Mówiąc o dawnym pięknym życiu"
+        ],
+        [
+            "Na szklanej tafli lód się układa",
+            "Świtem mroźnym słońce nas wita",
+            "W mroźnej koronie każda kobita",
+            "Dziś o zimowej bajce powiada"
+        ],
+        [
+            "W szafie dębowej czas się zatrzymał",
+            "Ludzie się boją i ciągle stoją",
+            "Oni się jutra tak bardzo boją",
+            "Gdy stary kucharz zupę nadymał"
+        ],
+        [
+            "Stary zegarze co wciąż tak tykasz",
+            "Świetnie te sny i marzenia chowasz",
+            "Ty je tak dobrze przed nami chowasz",
+            "Gdy ty ze strachu przed nami znikasz"
+        ],
+        [
+            "Mała chatynka w boru ciemnym stoi",
+            "Okna jej świecą żółtym blaskiem",
+            "Może tam wczoraj zanim przed brzaskiem",
+            "Ktoś się potworów dzikich nie boi"
+        ],
+        [
+            "System nas mieli w swoim żarnie",
+            "Jesteś numerem w wielkiej tabeli",
+            "Będą nas wszystkich tak ciągle mieli",
+            "Aż skończymy wszyscy bardzo marnie"
+        ],
+        [
+            "Sztuczna inteligencja patrzy na ręce",
+            "Analizuje twój każdy ruch",
+            "Jesteś dla niej jak mały duch",
+            "W tej wielkiej cyfrowej udręce"
+        ],
+        [
+            "Hajs się musi zgadzać na koncie",
+            "Bez tego jesteś nikim dla świata",
+            "Nawet twój ojciec i twoja tata",
+            "Mówią o tym w każdym remoncie"
+        ],
+        [
+            "Miłość na tinderze szybko znika",
+            "Przesuwasz w prawo albo w lewo",
+            "Jakby to było jakieś drzewo",
+            "Które w twym sercu cicho pomyka"
+        ],
+        [
+            "Streaming zabija prawdziwą płytę",
+            "Muzyka staje się tłem do życia",
+            "Wszystko wychodzi u nas ze skrycia",
+            "Wszystkie talenty są już odkryte"
+        ],
+        [
+            "Patointeligencja rządzi na necie",
+            "Głupota sprzedaje się najdrożej",
+            "Zaraz tu będzie co raz to gorzej",
+            "W tym beznadziejnym i chorym świecie"
+        ],
+        [
+            "NFT to jest bańka mydlana",
+            "Kupiłeś obrazek za milion złotych",
+            "Dostaniesz teraz po uszach po złotych",
+            "A twoja dusza jest zaprzedana"
+        ],
+        [
+            "Wirtualna rzeczywistość to pułapka",
+            "Zakładasz gogle i znikasz stąd",
+            "To jest twój nowy i lepszy ląd",
+            "Gdzie nie dosięgnie cię żadna łapka"
+        ],
+        [
+            "Korporacja wysysa twą duszę",
+            "Deadline goni kolejny deadline",
+            "Mówisz że to jest ten wielki design",
+            "Ale to tylko są puste katusze"
+        ],
+        [
+            "Pandemia strachu wciąż nas paraliżuje",
+            "Maski na twarzach i w naszych sercach",
+            "W naszych betonowo szklanych mercach",
+            "Gdzie nikt niczego już nie miłuje"
+        ]
+    ]
+}
