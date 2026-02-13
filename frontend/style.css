@@ -1,22 +1,25 @@
 :root {
   font-size: 100%;
-  /* Premium 4-Color Palette */
-  --color-bg-deep: #0a0a0f;
-  --color-bg-panel: #16161d;
-  --color-accent: #8b5cf6;
-  --color-text-primary: #f5f5f7;
-  --color-text-secondary: #9ca3af;
 
-  /* Derived colors for consistency */
-  --color-accent-dim: rgba(139, 92, 246, 0.15);
-  --color-accent-glow: rgba(139, 92, 246, 0.4);
-  --color-border: rgba(245, 245, 247, 0.08);
+  /* Brand Palette */
+  --color-bg-deep: #0F0F12;
+  --color-bg-panel: rgba(255, 255, 255, 0.07);
+  --color-accent: #84EB0C;
+  --color-golden: #BB974D;
+  --color-red: #D64444;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.55);
+
+  /* Derived */
+  --color-accent-dim: rgba(132, 235, 12, 0.12);
+  --color-accent-glow: rgba(132, 235, 12, 0.35);
+  --color-border: rgba(255, 255, 255, 0.08);
 
   /* Typography */
-  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --line-height-base: 1.6;
 
-  /* Spacing system */
+  /* Spacing */
   --space-xs: 0.5rem;
   --space-sm: 0.75rem;
   --space-md: 1rem;
@@ -24,7 +27,7 @@
   --space-xl: 2rem;
   --space-2xl: 3rem;
 
-  /* Border radius */
+  /* Radius */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
@@ -52,7 +55,7 @@ body {
   justify-content: center;
   padding: var(--space-md);
   background-image: radial-gradient(circle at 20% 50%,
-      var(--color-accent-dim) 0%,
+      rgba(132, 235, 12, 0.06) 0%,
       transparent 50%);
 }
 
@@ -125,11 +128,11 @@ textarea:focus {
 
 button {
   background: var(--color-accent);
-  color: white;
+  color: #0F0F12;
   border: none;
   padding: var(--space-sm) var(--space-xl);
   border-radius: var(--radius-sm);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.9375rem;
   cursor: pointer;
   transition: all var(--transition-base);
@@ -140,7 +143,7 @@ button {
 button:hover:not(:disabled) {
   transform: translateY(-1px);
   box-shadow: 0 4px 16px var(--color-accent-glow);
-  background: #9d6ff8;
+  background: #96f52a;
 }
 
 button:active:not(:disabled) {
@@ -229,13 +232,13 @@ button:disabled {
 
 .stanza-card:hover {
   border-left-color: var(--color-accent);
-  background: rgba(139, 92, 246, 0.05);
+  background: rgba(132, 235, 12, 0.05);
   transform: translateX(4px);
 }
 
 .stanza-card.copied {
-  background: rgba(139, 92, 246, 0.15);
-  border-left-color: #10b981;
+  background: rgba(132, 235, 12, 0.12);
+  border-left-color: var(--color-accent);
 }
 
 .stanza-line {
@@ -268,18 +271,18 @@ button:disabled {
 }
 
 .badge-perfect {
-  background: rgba(16, 185, 129, 0.15);
-  color: #10b981;
+  background: rgba(132, 235, 12, 0.15);
+  color: #84EB0C;
 }
 
 .badge-dominant {
-  background: var(--color-accent-dim);
-  color: var(--color-accent);
+  background: rgba(187, 151, 77, 0.15);
+  color: #BB974D;
 }
 
 .badge-near {
-  background: rgba(251, 191, 36, 0.15);
-  color: #fbbf24;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .verse-results {
@@ -287,8 +290,8 @@ button:disabled {
 }
 
 .rhyme-tail-badge {
-  background: rgba(16, 185, 129, 0.15);
-  color: #10b981;
+  background: rgba(132, 235, 12, 0.15);
+  color: #84EB0C;
   padding: 2px 8px;
   border-radius: 4px;
   font-weight: 700;
@@ -307,8 +310,8 @@ button:disabled {
 }
 
 .syl-badge {
-  background: rgba(139, 92, 246, 0.1);
-  color: var(--color-accent);
+  background: rgba(187, 151, 77, 0.12);
+  color: var(--color-golden);
   padding: 2px 8px;
   border-radius: 4px;
   font-weight: 600;

@@ -20,8 +20,8 @@ document.body.prepend(statusBanner);
 function showStatus(msg, type = 'error') {
     statusBanner.textContent = msg;
     statusBanner.style.display = 'block';
-    statusBanner.style.background = type === 'error' ? '#ff4444' : type === 'warn' ? '#ff8800' : '#22cc66';
-    statusBanner.style.color = '#fff';
+    statusBanner.style.background = type === 'error' ? '#D64444' : type === 'warn' ? '#BB974D' : '#84EB0C';
+    statusBanner.style.color = type === 'success' ? '#0F0F12' : '#fff';
     if (type !== 'error') setTimeout(() => { statusBanner.style.display = 'none'; }, 3000);
 }
 function hideStatus() { statusBanner.style.display = 'none'; }
