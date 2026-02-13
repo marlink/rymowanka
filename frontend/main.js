@@ -29,13 +29,13 @@ function hideStatus() { statusBanner.style.display = 'none'; }
 async function fetchWithRetry(url, options, retries = MAX_RETRIES) {
     for (let attempt = 1; attempt <= retries; attempt++) {
         try {
-            const response = await fetch(url, options);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const r = await fetch(url, options);
+            if (!r.ok) throw new Error(`HTTP ${r.status}`);
             hideStatus();
-            return response;
+            return r;
         } catch (err) {
             if (attempt < retries) {
-                showStatus(`Backend unreachable — retry ${attempt}/${retries - 1}...`, 'warn');
+                showStatus(`Retry ${attempt}/${retries - 1}...`, 'warn');
                 await new Promise(r => setTimeout(r, RETRY_DELAY * attempt));
             } else throw err;
         }
@@ -63,41 +63,34 @@ async function generate() {
             body: JSON.stringify({ verse, seen: seenLines })
         });
         const data = await response.json();
-
-        if (data.mode === 'word') {
-            renderWordMode(data);
-        } else {
-            renderVerseMode(data);
-        }
-        showStatus('✓ Generated — hit again for new suggestions', 'success');
+        data.mode === 'word' ? renderWordMode(data) : renderVerseMode(data);
+        showStatus('✓ Hit Generate again for fresh suggestions', 'success');
     } catch (error) {
         console.error(error);
         showStatus('Backend offline — start server.py on :8000', 'error');
     } finally {
         generateBtn.disabled = false;
-        generateBtn.textContent = 'Generate Magic';
+        generateBtn.textContent = 'Generate 🎤';
         loadingIndicator.style.display = 'none';
     }
 }
 
-// --- WORD MODE: show rhyming words in PERFECT / DOMINANT / NEAR columns ---
+// --- WORD MODE: 3 columns ---
 function renderWordMode(data) {
-    const cols = ['PERFECT', 'DOMINANT', 'NEAR'];
     resultsArea.innerHTML = '';
+    const grades = ['PERFECT', 'DOMINANT', 'NEAR'];
 
-    cols.forEach(grade => {
+    grades.forEach(grade => {
         const col = document.createElement('div');
-        col.className = `mode-column ${grade.toLowerCase()}`;
+        col.className = 'mode-column';
 
         const h3 = document.createElement('h3');
         h3.textContent = grade;
         col.appendChild(h3);
 
-        const list = document.createElement('div');
         const items = data.words?.[grade] || [];
-
-        if (items.length === 0) {
-            list.innerHTML = '<div class="empty-state">No matches</div>';
+        if (!items.length) {
+            col.innerHTML += '<div class="empty-state">—</div>';
         } else {
             items.forEach(item => {
                 const card = document.createElement('div');
@@ -109,43 +102,42 @@ function renderWordMode(data) {
                     <div class="stanza-meta">
                         <span class="badge badge-${grade.toLowerCase()}">${grade}</span>
                         <span class="score">${Math.round(item.score * 100)}%</span>
-                    </div>
-                `;
+                    </div>`;
                 card.addEventListener('click', () => copyCard(card, item.word, item.score));
-                list.appendChild(card);
+                col.appendChild(card);
             });
         }
-
-        col.appendChild(list);
         resultsArea.appendChild(col);
     });
-
     resultsArea.classList.add('visible');
 }
 
-// --- VERSE MODE: show one verse per AABB / ABAB / ABBA column ---
+// --- VERSE MODE: single ranked list ---
 function renderVerseMode(data) {
-    const schemes = ['AABB', 'ABAB', 'ABBA'];
     resultsArea.innerHTML = '';
 
-    schemes.forEach(scheme => {
-        const col = document.createElement('div');
-        col.className = 'mode-column';
+    const col = document.createElement('div');
+    col.className = 'mode-column verse-results';
 
-        const h3 = document.createElement('h3');
-        h3.textContent = scheme;
-        col.appendChild(h3);
+    const header = document.createElement('h3');
+    const inputSyl = data.input_syllables || '?';
+    header.innerHTML = `Rhyming lines <span class="rhyme-tail-badge">-${data.rhyme_tail}</span> <span class="syl-info">${inputSyl} syl</span>`;
+    col.appendChild(header);
 
-        const item = data.verses?.[scheme];
-
-        if (!item) {
-            col.innerHTML += '<div class="empty-state">No matching verse found</div>';
-        } else {
+    const verses = data.verses || [];
+    if (!verses.length) {
+        col.innerHTML += '<div class="empty-state">No rhyming verses found in corpus. Try a different ending word.</div>';
+    } else {
+        verses.forEach(item => {
             seenLines.push(item.line);
 
-            const lineWords = item.line.split(' ');
-            const lastWord = lineWords.pop();
-            const lineStart = lineWords.join(' ');
+            const words = item.line.split(' ');
+            const lastWord = words.pop();
+            const lineStart = words.join(' ');
+
+            const sylMatch = data.input_syllables
+                ? (item.syllables === data.input_syllables ? '✓' : `${item.syllables}`)
+                : item.syllables;
 
             const card = document.createElement('div');
             card.className = 'stanza-card';
@@ -154,17 +146,15 @@ function renderVerseMode(data) {
                     <div class="stanza-line verse-line">${lineStart} <span class="rhyme-highlight">${lastWord}</span></div>
                 </div>
                 <div class="stanza-meta">
-                    <span class="badge badge-perfect">${scheme}</span>
+                    <span class="syl-badge">${sylMatch} syl</span>
                     <span class="score">${Math.round(item.score * 100)}%</span>
-                </div>
-            `;
+                </div>`;
             card.addEventListener('click', () => copyCard(card, item.line, item.score));
             col.appendChild(card);
-        }
+        });
+    }
 
-        resultsArea.appendChild(col);
-    });
-
+    resultsArea.appendChild(col);
     resultsArea.classList.add('visible');
 }
 
@@ -180,7 +170,6 @@ function copyCard(card, text, score) {
     });
 }
 
-// Reset seen when last word changes
 let lastWord = '';
 verseInput.addEventListener('input', () => {
     const curr = verseInput.value.trim().split(/\s+/).pop()?.toLowerCase() || '';

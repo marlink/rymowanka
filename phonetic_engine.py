@@ -55,7 +55,21 @@ class PhoneticEngine:
         return w
 
     def get_vowel_positions(self, word):
-        return [i for i, c in enumerate(word) if c in self.vowels]
+        """
+        Get vowel positions, skipping 'i' when it acts as a consonant softener.
+        In Polish, consonant + i + vowel = one syllable (i softens the consonant).
+        e.g. 'sobie' = so-bie (2 syllables), NOT so-bi-e (3).
+        """
+        positions = []
+        for i, c in enumerate(word):
+            if c not in self.vowels:
+                continue
+            # Skip softening 'i': preceded by consonant AND followed by vowel
+            if c == 'i' and i > 0 and word[i - 1] not in self.vowels:
+                if i + 1 < len(word) and word[i + 1] in self.vowels:
+                    continue
+            positions.append(i)
+        return positions
 
     def build_entry(self, word):
         norm = self.normalize(word)

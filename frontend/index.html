@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rhyme Architect | Premium Rap Engine</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="app">
-      <header>
-        <h1>Rhyme Architect</h1>
-        <p class="subtitle">Elevate your flow with v2.1 Phonetic Engine</p>
-      </header>
 
-      <div class="container">
-        <section class="input-section">
-          <textarea id="verse-input" placeholder="Type your verse here... e.g. Jadę swoim samochodem"></textarea>
-          <div id="loading-indicator" class="loading">Analyzing phonetics...</div>
-          <div class="controls">
-            <button id="generate-btn">Generate Magic</button>
-          </div>
-        </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rhyme Architect | Premium Rap Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
 
-        <section id="results" class="results-section"></section>
-      </div>
+<body>
+  <div id="app">
+    <header>
+      <h1>Rhyme Architect</h1>
+      <p class="subtitle">Polish Rap Rhyme Engine — word or verse</p>
+    </header>
+
+    <div class="container">
+      <section class="input-section">
+        <textarea id="verse-input"
+          placeholder="One word → rhyming words  |  Full verse → rhyming lines from corpus"></textarea>
+        <div id="loading-indicator" class="loading">Analyzing phonetics...</div>
+        <div class="controls">
+          <button id="generate-btn">Generate 🎤</button>
+        </div>
+      </section>
+
+      <section id="results" class="results-section"></section>
     </div>
-    <script type="module" src="/main.js"></script>
-  </body>
+  </div>
+  <script type="module" src="/main.js"></script>
+</body>
+
 </html>
