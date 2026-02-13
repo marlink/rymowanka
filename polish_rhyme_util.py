@@ -5,22 +5,7 @@ and a RhymeFinder class backed by PhoneticEngine.
 """
 
 import re
-from phonetic_engine import PhoneticEngine
-
-# Shared engine instance (lazy-loaded with vocabulary)
-_engine = None
-
-def _get_engine():
-    global _engine
-    if _engine is None:
-        try:
-            with open("words_pl.txt", "r", encoding="utf-8") as f:
-                vocab = [line.strip().lower() for line in f if len(line.strip()) > 2]
-        except FileNotFoundError:
-            vocab = []
-        _engine = PhoneticEngine(vocab)
-    return _engine
-
+from config import ENGINE
 
 # --- Polish vowels for syllable counting ---
 _PL_VOWELS = set('aeęąioóuy')
@@ -45,10 +30,9 @@ def get_phonetic_suffix(word: str, depth: int = 2) -> str:
     Return the phonetic suffix of a word (last `depth` vowel nuclei + trailing consonants).
     Uses PhoneticEngine.normalize for consistent representation.
     """
-    engine = _get_engine()
     clean = re.sub(r'[^\w]', '', word.lower())
-    norm = engine.normalize(clean)
-    vowel_positions = engine.get_vowel_positions(norm)
+    norm = ENGINE.normalize(clean)
+    vowel_positions = ENGINE.get_vowel_positions(norm)
 
     if not vowel_positions:
         return norm
@@ -84,8 +68,7 @@ def verify_rhyme_scheme(stanza: list[str], scheme: str = "AABB") -> tuple[bool, 
 
     # For comparing suffixes directly (already extracted), just compare tail_d1
     def tail1(s: str) -> str:
-        engine = _get_engine()
-        vp = engine.get_vowel_positions(s)
+        vp = ENGINE.get_vowel_positions(s)
         if not vp:
             return s
         return s[vp[-1]:]
@@ -106,24 +89,18 @@ def verify_rhyme_scheme(stanza: list[str], scheme: str = "AABB") -> tuple[bool, 
 
 def get_phonetic_suffix_raw(word: str) -> str:
     """Simplified: return tail_d1 of a normalized word (last vowel + rest)."""
-    engine = _get_engine()
-    norm = engine.normalize(re.sub(r'[^\w]', '', word.lower()))
-    vp = engine.get_vowel_positions(norm)
+    norm = ENGINE.normalize(re.sub(r'[^\w]', '', word.lower()))
+    vp = ENGINE.get_vowel_positions(norm)
     if not vp:
         return norm
     return norm[vp[-1]:]
 
 
 class RhymeFinder:
-    """Wrapper around PhoneticEngine for finding rhymes from the vocabulary."""
+    """Wrapper around PhoneticEngine for finding rhymes using the shared instance."""
 
-    def __init__(self, vocabulary_path: str = "words_pl.txt"):
-        try:
-            with open(vocabulary_path, "r", encoding="utf-8") as f:
-                vocab = [line.strip().lower() for line in f if len(line.strip()) > 2]
-        except FileNotFoundError:
-            vocab = []
-        self.engine = PhoneticEngine(vocab)
+    def __init__(self):
+        self.engine = ENGINE
 
     def find_rhymes(self, word: str, limit: int = 10) -> list[str]:
         """Find rhyming words for the given word."""

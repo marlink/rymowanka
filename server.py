@@ -1,18 +1,35 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request, Response
 from pydantic import BaseModel
 from typing import List, Dict, Optional
 import uvicorn
+import time
 import re
 import random
 from collections import defaultdict
 from fastapi.middleware.cors import CORSMiddleware
-from phonetic_engine import PhoneticEngine
+from config import ENGINE, LYRICS_PATH, CORS_ORIGINS, MAX_INPUT_LENGTH, RATE_LIMIT_PER_MINUTE
 
 app = FastAPI(title="Rhyme Architect API")
 
+# --- Rate Limiting ---
+RATE_LIMIT_DATA = defaultdict(list)
+
+@app.middleware("http")
+async def rate_limit_middleware(request: Request, call_next):
+    client_ip = request.client.host
+    now = time.time()
+    RATE_LIMIT_DATA[client_ip] = [t for t in RATE_LIMIT_DATA[client_ip] if t > now - 60]
+    
+    if len(RATE_LIMIT_DATA[client_ip]) >= RATE_LIMIT_PER_MINUTE:
+         return Response(content="Rate limit exceeded", status_code=429)
+    
+    RATE_LIMIT_DATA[client_ip].append(now)
+    response = await call_next(request)
+    return response
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
@@ -31,14 +48,6 @@ def is_clean_word(w: str) -> bool:
     return True
 
 
-def load_vocabulary():
-    try:
-        with open("words_pl.txt", "r", encoding="utf-8") as f:
-            return [line.strip().lower() for line in f if len(line.strip()) > 2]
-    except FileNotFoundError:
-        return []
-
-
 def clean_last_word(text: str) -> str:
     words = text.strip().split()
     if not words:
@@ -46,27 +55,28 @@ def clean_last_word(text: str) -> str:
     return re.sub(r'[^\w]', '', words[-1].lower())
 
 
-def count_syllables(text: str, engine: PhoneticEngine) -> int:
+def count_syllables(text: str) -> int:
     """Count syllables in a line using engine's vowel detection."""
     total = 0
     for word in text.split():
         clean = re.sub(r'[^\w]', '', word.lower())
         if not clean:
             continue
-        norm = engine.normalize(clean)
-        total += max(len(engine.get_vowel_positions(norm)), 1)
+        norm = ENGINE.normalize(clean)
+        total += max(len(ENGINE.get_vowel_positions(norm)), 1)
     return total
 
 
-def load_lyrics_corpus(engine: PhoneticEngine):
+def load_lyrics_corpus():
     lines_by_d2 = defaultdict(list)
     lines_by_word = defaultdict(list)
     all_lines = []
 
     try:
-        with open("lyrics_corrected.txt", "r", encoding="utf-8") as f:
+        with open(LYRICS_PATH, "r", encoding="utf-8") as f:
             raw = f.readlines()
     except FileNotFoundError:
+        print(f"⚠️ Warning: Lyrics corpus not found at {LYRICS_PATH}")
         return lines_by_d2, lines_by_word, all_lines
 
     skip = re.compile(r'^\s*$|^\[|^#|^-{3,}|^\(|^Style:|^End|^Fade|^Finish')
@@ -83,7 +93,7 @@ def load_lyrics_corpus(engine: PhoneticEngine):
         if len(last) < 2:
             continue
 
-        entry = engine.build_entry(last)
+        entry = ENGINE.build_entry(last)
         lines_by_d2[entry.tail_d2].append(line_clean)
         lines_by_word[last].append(line_clean)
         all_lines.append(line_clean)
@@ -92,9 +102,7 @@ def load_lyrics_corpus(engine: PhoneticEngine):
 
 
 # --- Initialize ---
-VOCABULARY = load_vocabulary()
-engine = PhoneticEngine(VOCABULARY)
-LINES_BY_D2, LINES_BY_WORD, ALL_LINES = load_lyrics_corpus(engine)
+LINES_BY_D2, LINES_BY_WORD, ALL_LINES = load_lyrics_corpus()
 print(f"📚 Corpus: {len(ALL_LINES)} lines, {len(LINES_BY_D2)} unique rhyme tails")
 
 
@@ -138,14 +146,14 @@ def find_rhyming_verses(target_word: str, target_entry, seen_set: set,
         rw = clean_last_word(line)
         if rw == target_word:
             continue
-        syl = count_syllables(line, engine)
+        syl = count_syllables(line)
         syl_diff = abs(syl - input_syllables)
         # Score: base 1.0, penalize syllable mismatch
         score = max(1.0 - (syl_diff * 0.08), 0.5)
         results.append(VerseSuggestion(line=line, rhyme_word=rw, score=score, syllables=syl))
 
     # Strategy 2: Dictionary rhyme words → corpus lines
-    rhyming_words = engine.find_candidates(target_word)
+    rhyming_words = ENGINE.find_candidates(target_word)
     perfect_words = [w for w, grade, sc in rhyming_words if grade == "PERFECT"]
     random.shuffle(perfect_words)
 
@@ -154,7 +162,7 @@ def find_rhyming_verses(target_word: str, target_entry, seen_set: set,
         for line in LINES_BY_WORD.get(rw, []):
             if line in existing_lines or line.lower().strip() == input_lower or line in seen_set:
                 continue
-            syl = count_syllables(line, engine)
+            syl = count_syllables(line)
             syl_diff = abs(syl - input_syllables)
             score = max(0.9 - (syl_diff * 0.08), 0.4)
             results.append(VerseSuggestion(line=line, rhyme_word=rw, score=score, syllables=syl))
@@ -167,6 +175,9 @@ def find_rhyming_verses(target_word: str, target_entry, seen_set: set,
 
 @app.post("/generate", response_model=GenerationResponse)
 async def generate_rhymes(request: GenerationRequest):
+    if len(request.verse) > MAX_INPUT_LENGTH:
+         raise HTTPException(status_code=400, detail=f"Input too long (max {MAX_INPUT_LENGTH} chars)")
+
     text = request.verse.strip()
     if not text:
         raise HTTPException(status_code=400, detail="Empty input")
@@ -176,13 +187,13 @@ async def generate_rhymes(request: GenerationRequest):
     if not target_word:
         raise HTTPException(status_code=400, detail="No valid word found")
 
-    target_entry = engine.build_entry(target_word)
+    target_entry = ENGINE.build_entry(target_word)
     is_single_word = len(text.split()) == 1
 
     print(f"🔍 '{text}' → word='{target_word}' tail='{target_entry.tail_d2}' mode={'word' if is_single_word else 'verse'}")
 
     if is_single_word:
-        raw_results = engine.find_candidates(target_word)
+        raw_results = ENGINE.find_candidates(target_word)
         payload = {"PERFECT": [], "DOMINANT": [], "NEAR": []}
         for word, grade, score in raw_results:
             if not is_clean_word(word):
@@ -194,7 +205,7 @@ async def generate_rhymes(request: GenerationRequest):
             rhyme_tail=target_entry.tail_d2, words=payload
         )
     else:
-        input_syl = count_syllables(text, engine)
+        input_syl = count_syllables(text)
         verses = find_rhyming_verses(
             target_word, target_entry, seen_set, text.lower().strip(), input_syl
         )

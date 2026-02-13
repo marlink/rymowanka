@@ -1,6 +1,6 @@
 import './style.css'
 
-const API_URL = 'http://localhost:8000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1500;
 
@@ -130,6 +130,7 @@ function renderVerseMode(data) {
     } else {
         verses.forEach(item => {
             seenLines.push(item.line);
+            if (seenLines.length > 50) seenLines.shift();
 
             const words = item.line.split(' ');
             const lastWord = words.pop();
