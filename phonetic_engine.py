@@ -29,6 +29,7 @@ class PhoneticEngine:
         
         self.index_d2 = defaultdict(list)
         self.index_d1 = defaultdict(list)
+        self.index_vowels = defaultdict(list) # New: Assonance index
         self.word_map = {} # original -> WordEntry
         
         if vocabulary:
@@ -57,8 +58,6 @@ class PhoneticEngine:
     def get_vowel_positions(self, word):
         """
         Get vowel positions, skipping 'i' when it acts as a consonant softener.
-        In Polish, consonant + i + vowel = one syllable (i softens the consonant).
-        e.g. 'sobie' = so-bie (2 syllables), NOT so-bi-e (3).
         """
         positions = []
         for i, c in enumerate(word):
@@ -78,17 +77,28 @@ class PhoneticEngine:
         tail_d1 = norm[v_pos[-1]:] if v_pos else norm
         tail_d2 = norm[v_pos[-2]:] if len(v_pos) >= 2 else tail_d1
         
-        return WordEntry(word, norm, len(v_pos), tail_d2, tail_d1)
+        # Extract vowels string for assonance (e.g., 'kawa' -> 'aa')
+        vowel_seq = "".join([norm[i] for i in v_pos])
+        # We only really care about the last 2-3 vowels for rhyming
+        if len(vowel_seq) > 2:
+            vowel_seq = vowel_seq[-2:]
+        
+        return WordEntry(word, norm, len(v_pos), tail_d2, tail_d1), vowel_seq
 
     def build_index(self, vocabulary):
         for word in vocabulary:
-            entry = self.build_entry(word)
+            entry, vowel_seq = self.build_entry(word)
             self.word_map[word] = entry
             self.index_d2[entry.tail_d2].append(entry)
             self.index_d1[entry.tail_d1].append(entry)
+            # Only index assonance if we have at least 1 vowel
+            if vowel_seq:
+                self.index_vowels[vowel_seq].append(entry)
 
     def find_candidates(self, target_word):
-        target = self.build_entry(target_word)
+        entry_tuple = self.build_entry(target_word)
+        target = entry_tuple[0]
+        target_vowels = entry_tuple[1]
         
         # Tier 1: Multi-syllabic exact match (real rhymes)
         perfect = self.index_d2.get(target.tail_d2, [])
@@ -99,27 +109,65 @@ class PhoneticEngine:
         
         for cand in perfect:
             if cand.original in seen: continue
-            score = self.score(target, cand, True)
+            score = self.score(target, cand, 'PERFECT')
             results.append((cand.original, "PERFECT", score))
             seen.add(cand.original)
 
-        # Tier 2: Single-vowel match — ONLY if suffix is meaningful (3+ chars)
-        # A 1-2 char tail like "o" or "em" matches thousands of unrelated words
+        # Tier 2: Single-vowel match (Weak Rhymes)
         if len(target.tail_d1) >= 3:
             near_candidates = self.index_d1.get(target.tail_d1, [])
             for cand in near_candidates:
                 if cand.original in seen: continue
-                score = self.score(target, cand, False)
-                grade = "DOMINANT" if score > 0.7 else "NEAR"
+                # Limit checking to prevent timeouts on common sounds
+                # (simple heuristic constraint)
+                if len(seen) > 2000: break 
+                
+                score = self.score(target, cand, 'NEAR')
+                grade = "NEAR"
+                results.append((cand.original, grade, score))
+                seen.add(cand.original)
+        
+        # Tier 3: Assonance (Vowel Match) - The "Rap Rhyme"
+        # This captures "kawa" ~ "mapa" (aa ~ aa)
+        if target_vowels:
+            assonance_candidates = self.index_vowels.get(target_vowels, [])
+            # IMPORTANT: Assonance lists can be huge (all words ending in 'a' or 'e')
+            # So we must sample or traverse carefully. 
+            # We shuffle or just take the first N? The vocab is sorted alphabetically usually.
+            # Ideally we'd prefer words with same syllable count.
+            
+            count = 0
+            for cand in assonance_candidates:
+                if cand.original in seen: continue
+                
+                # Soft limit for performance
+                if count > 3000: break
+                count += 1
+
+                # Heuristic: Match syllable count for better flow
+                is_same_len = (cand.vowels == target.vowels)
+                
+                score = 0.6 # Base score for assonance
+                if is_same_len: score += 0.1
+                
+                # If consonant skeleton matches partially?
+                # For now just classify as DOMINANT if same syll + matched vowels
+                grade = "DOMINANT" if is_same_len else "NEAR"
+                
                 results.append((cand.original, grade, score))
                 seen.add(cand.original)
             
         return sorted(results, key=lambda x: x[2], reverse=True)
 
-    def score(self, t, c, is_d2):
-        score = 1.0 if is_d2 else 0.8
-        # Flow penalty
+    def score(self, t, c, mode):
+        # Base scores
+        if mode == 'PERFECT': score = 1.0
+        elif mode == 'NEAR': score = 0.7
+        else: score = 0.5
+        
+        # Penalty for syllable count mismatch
         syll_diff = abs(t.vowels - c.vowels)
-        if syll_diff > 1: score *= 0.6
-        elif syll_diff == 1: score *= 0.9
+        if syll_diff > 1: score *= 0.8
+        elif syll_diff == 1: score *= 0.95
+        
         return score
