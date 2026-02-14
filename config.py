@@ -14,6 +14,15 @@ HOST = os.getenv("HOST", "0.0.0.0")
 PORT = int(os.getenv("PORT", "8000"))
 CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",")
 
+# --- Scores ---
+WORD_SCORES = {}
+try:
+    import json
+    with open(os.path.join(BASE_DIR, "word_scores.json"), "r", encoding="utf-8") as f:
+        WORD_SCORES = json.load(f)
+except Exception:
+    pass
+
 # --- Limits ---
 MAX_INPUT_LENGTH = int(os.getenv("MAX_INPUT_LENGTH", "500"))
 RATE_LIMIT_PER_MINUTE = int(os.getenv("RATE_LIMIT_PER_MINUTE", "30"))

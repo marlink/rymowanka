@@ -7,7 +7,7 @@ import re
 import random
 from collections import defaultdict
 from fastapi.middleware.cors import CORSMiddleware
-from config import ENGINE, LYRICS_PATH, CORS_ORIGINS, MAX_INPUT_LENGTH, RATE_LIMIT_PER_MINUTE
+from config import ENGINE, LYRICS_PATH, CORS_ORIGINS, MAX_INPUT_LENGTH, RATE_LIMIT_PER_MINUTE, WORD_SCORES
 
 app = FastAPI(title="Rhyme Architect API")
 
@@ -198,12 +198,25 @@ async def generate_rhymes(request: GenerationRequest):
 
     if is_single_word:
         raw_results = ENGINE.find_candidates(target_word)
-        payload = {"PERFECT": [], "DOMINANT": [], "NEAR": []}
-        for word, grade, score in raw_results:
+        # Apply prioritization scores
+        processed = []
+        for word, grade, base_score in raw_results:
             if not is_clean_word(word):
                 continue
+            
+            # Boost score based on our quality mapping
+            priority = WORD_SCORES.get(word, 0.5)
+            final_score = base_score * priority
+            processed.append((word, grade, final_score))
+            
+        # Sort by grade first, then by the boosted score
+        processed.sort(key=lambda x: (x[1] != "PERFECT", x[1] != "DOMINANT", -x[2]))
+
+        payload = {"PERFECT": [], "DOMINANT": [], "NEAR": []}
+        for word, grade, score in processed:
             if len(payload[grade]) < 10:
                 payload[grade].append(WordSuggestion(word=word, grade=grade, score=score))
+        
         return GenerationResponse(
             mode="word", original_word=target_word,
             rhyme_tail=target_entry.tail_d2, words=payload

@@ -1,24 +1,17 @@
 ## Deployment (Option 2: Hybrid)
 
-### 1. Backend (Render.com)
-1. Fork/Clone this repo to GitHub.
-2. Sign up for **Render.com**.
-3. Create "New Web Service".
-4. Connect your repo.
-5. Runtime: **Docker** (it will auto-detect `Dockerfile`).
-6. **Environment Variables**:
-   - `CORS_ORIGINS`: `https://your-frontend.vercel.app` (add after deploying frontend)
-7. Click **Deploy**.
+### 1. Backend (Railway.app)
+1. Sign up/Log in to [Railway.app](https://railway.app).
+2. **New Project** → **Deploy from GitHub repo**.
+3. Select this repository.
+4. Railway detects the root `Dockerfile` and deploys automatically.
+5. **Variables**: Add `CORS_ORIGINS` = `https://your-frontend.vercel.app`.
 
 ### 2. Frontend (Vercel)
-1. Sign up for **Vercel**.
-2. "Add New..." -> Project.
-3. Import your repo.
-4. **Root Directory**: Select `frontend` folder (Edit).
-5. **Framework Preset**: Vite (Auto-detected).
-6. **Environment Variables**:
-   - `VITE_API_URL`: `https://your-render-app.onrender.com` (from step 1)
-7. Click **Deploy**.
+1. Import repo to [Vercel](https://vercel.com).
+2. **Root Directory**: Set to `frontend`.
+3. **Variables**: Add `VITE_API_URL` = `https://your-railway-url.up.railway.app`.
+4. Deploy.
 
 
 ```
