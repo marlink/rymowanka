@@ -1112,7 +1112,6 @@ aubrey
 aubry
 aucie
 audacity
-audemars
 audi
 audiencję
 audii
@@ -1270,7 +1269,6 @@ babo
 babs
 babski
 babskie
-babsztyl
 babu
 baby
 babylon
@@ -1325,7 +1323,6 @@ bagaży
 bagdadu
 bagdadzie
 bagien
-bagiety
 bagna
 bagnach
 bagnie
@@ -1376,7 +1373,6 @@ balenciagą
 balenciagę
 balet
 baletu
-balety
 bali
 balistyczne
 balistyka
@@ -1406,9 +1402,6 @@ bambus
 banalne
 banan
 banana
-bananowa młodzież
-bananowe dziecko
-bananowiec
 bananowy
 banany
 bananów
@@ -1433,7 +1426,6 @@ bandą
 bandę
 bane
 bang
-banger
 bangkok
 bangkoka
 bangkokem
@@ -1771,7 +1763,6 @@ belmondoowie
 belmondoy
 belmondu
 belmont
-bema
 ben
 bena
 bend
@@ -2036,7 +2027,6 @@ białystokowie
 białystoku
 białystoky
 białą
-biba
 biblia
 biblii
 biblijne
@@ -2147,7 +2137,6 @@ bielsko-biało
 bielsko-biały
 bielsko-białą
 bielsko-białę
-biemwi
 bien
 bierz
 bierzcie
@@ -2166,7 +2155,6 @@ biggieowie
 biggiey
 biggs
 bij
-bijatyka
 bijcie
 bije
 bijesz
@@ -2328,7 +2316,6 @@ biżuterii
 biżuterią
 biżuterię
 bla
-blachara
 blachy
 blacie
 black
@@ -2362,7 +2349,6 @@ blefujesz
 blefuję
 blichtru
 bligh
-bling
 bliscy
 bliska
 bliski
@@ -2405,7 +2391,6 @@ blokadę
 bloki
 blokiem
 blokować
-blokowisko
 bloku
 blokuje
 blokujesz
@@ -2462,7 +2447,6 @@ bobo
 bobowi
 bobra
 boca
-bociarz
 boczek
 boczne
 bocznej
@@ -2567,7 +2551,6 @@ boleśnie
 boli
 boliwii
 bollywood
-bolt
 bolton
 bolą
 bom
@@ -2686,12 +2669,10 @@ boży
 bożym
 bożą
 bra
-brachol
 brachu
 braci
 bracia
 braciach
-braciak
 bracie
 braciom
 braciszek
@@ -3023,7 +3004,6 @@ brzydkiego
 brzydkim
 brzydko
 brzydką
-brzydota
 brzydzę
 brzytwa
 brzytwy
@@ -3178,7 +3158,6 @@ buntownikiem
 buntowników
 buntu
 bunty
-burak
 buraki
 burbank
 burberry
@@ -3425,7 +3404,6 @@ bąka
 bąki
 bęben
 bębny
-bęcwał
 będa
 będe
 będzie
@@ -3767,8 +3745,6 @@ cela
 celach
 celami
 cele
-celebryta
-celebrytka
 celebrytów
 celem
 celeste
@@ -3873,7 +3849,6 @@ chad
 chada
 chae
 chai
-chain
 chakotay
 cham
 chamberlain
@@ -4472,7 +4447,6 @@ chłopczyk
 chłopczyka
 chłopczyku
 chłopców
-chłopek
 chłopi
 chłopie
 chłopiec
@@ -4538,7 +4512,6 @@ ciechocinka
 ciechocinkiem
 ciechocinkowi
 ciechocinku
-ciecia
 ciecz
 ciekaw
 ciekawa
@@ -4638,7 +4611,6 @@ cieszyłem
 cieszą
 cieszę
 ciezko
-cieć
 cień
 cieście
 cii
@@ -4810,7 +4782,6 @@ cmentarza
 cmentarzu
 cna
 cnota
-cnotka
 cnoty
 cnotę
 cnót
@@ -5146,7 +5117,6 @@ cylinder
 cylon
 cyloni
 cylonów
-cymbał
 cynamon
 cyniczna
 cyniczny
@@ -5374,7 +5344,6 @@ czesławu
 czesławy
 cześc
 cześć
-czil
 czip
 czipsy
 czkawka
@@ -5552,7 +5521,6 @@ czyz
 czyń
 czyś
 czyści
-czyściec
 czyścić
 czyścił
 czyśćcu
@@ -5955,7 +5923,6 @@ dedal
 dede
 dedykuję
 dee
-deejay
 deeks
 deena
 deep
@@ -5980,7 +5947,6 @@ deichmanny
 deirdre
 deja
 dekad
-dekada
 dekady
 dekadę
 deke
@@ -6066,8 +6032,6 @@ denise
 dennis
 dennisa
 denny
-dens
-densy
 dent
 denton
 dentysta
@@ -6298,7 +6262,6 @@ dix
 dixie
 dixon
 dixona
-dj
 django
 djdzon
 dku
@@ -6620,7 +6583,6 @@ doliny
 doliną
 dolinę
 dollar
-dollary
 dolls
 dolly
 dolna
@@ -6689,7 +6651,6 @@ domyśliłem
 domyśliłeś
 domyślą
 domów
-domówka
 don
 dona
 donaghy
@@ -7307,8 +7268,6 @@ dreamteam
 dreamz
 dren
 dres
-dresa
-dresiarz
 dresie
 dreszcz
 dreszcze
@@ -7333,7 +7292,6 @@ drinki
 drinkiem
 drinku
 drinków
-drip
 driscoll
 drive
 drobiazg
@@ -7701,7 +7659,6 @@ dysk
 dyski
 dyskomfort
 dyskotece
-dyskoteka
 dyskotekę
 dyskrecja
 dyskrecji
@@ -7745,7 +7702,6 @@ dyżurze
 dzban
 dzbanek
 dzi
-dziad
 dziada
 dziadek
 dziadka
@@ -7756,7 +7712,6 @@ dziadkowie
 dziadku
 dziadków
 dziadostwo
-dziady
 dziala
 dziale
 dziać
@@ -8570,7 +8525,6 @@ epidemię
 epinefryny
 episode
 epizod
-epka
 epoce
 epoka
 epoki
@@ -8914,7 +8868,6 @@ fałszywą
 fbi
 fda
 fear
-feat
 fed
 fedcba
 federacja
@@ -8935,7 +8888,6 @@ feel
 feeling
 feet
 fei
-fejm
 fejsie
 feldman
 felicia
@@ -9144,7 +9096,6 @@ flet
 fletch
 fletcher
 fleur
-flex
 flick
 flint
 flip
@@ -9281,7 +9232,6 @@ fotel
 fotela
 fotele
 fotelu
-fotka
 fotki
 fotkę
 fotograf
@@ -9426,7 +9376,6 @@ frustracji
 frustrację
 frustrujące
 fry
-fryderyk
 frye
 frytek
 frytkami
@@ -9518,7 +9467,6 @@ gabinecie
 gabinet
 gabinetu
 gable
-gablota
 gabriel
 gabriela
 gabrielle
@@ -9598,7 +9546,6 @@ galę
 gamboa
 game
 gamma
-gamoń
 gandalf
 gandhi
 ganek
@@ -9770,7 +9717,6 @@ gedzowie
 gedzu
 gedzy
 gee
-geek
 geeta
 gej
 geja
@@ -9844,7 +9790,6 @@ geny
 genów
 geoff
 geoffrey
-geografia
 geografii
 geometrii
 geordi
@@ -10030,7 +9975,6 @@ glowie
 glowy
 glupi
 gminy
-gnat
 gnata
 gniazda
 gniazdka
@@ -10165,7 +10109,6 @@ gordon
 gordona
 gordy
 gore
-gorol
 gorset
 gorsi
 gorsza
@@ -10288,7 +10231,6 @@ gościach
 goście
 gościem
 gościmy
-gościnka
 gościnnego
 gościnności
 gościnność
@@ -10396,7 +10338,6 @@ grałem
 grałeś
 grało
 grały
-grażyna
 gre
 grease
 great
@@ -10733,7 +10674,6 @@ gwint
 gwizdać
 gwizdek
 gwizdka
-gwizdy
 gwoli
 gwoździ
 gwoździe
@@ -11071,7 +11011,6 @@ hans
 hansa
 hansen
 hanson
-hanys
 hap
 happy
 hara
@@ -11206,9 +11145,6 @@ heil
 heinrich
 hej
 hejka
-hejt
-hejter
-hejtowanie
 hejty
 hektor
 hel
@@ -11332,7 +11268,6 @@ hindusem
 hindusi
 hindusów
 hip
-hip-hop
 hipisów
 hipnoza
 hipnozy
@@ -11595,7 +11530,6 @@ huh
 huk
 hukiem
 hula
-hulajnoga
 hulk
 hulka
 human
@@ -11771,7 +11705,6 @@ igłą
 igłę
 iii
 ike
-ikona
 ile
 ilekroć
 ileż
@@ -11881,7 +11814,6 @@ infekcje
 infekcji
 infekcję
 influence
-influencer
 info
 informacja
 informacjach
@@ -11894,7 +11826,6 @@ informator
 informatora
 informatorem
 informatorów
-informatyk
 informować
 informował
 informuj
@@ -11951,7 +11882,6 @@ inspiruje
 inspirująca
 inspirujące
 inspirujący
-instagram
 instagramie
 instalacja
 instalacji
@@ -13164,7 +13094,6 @@ kairy
 kairze
 kaitlin
 kajal
-kajdan
 kajdanek
 kajdankach
 kajdankami
@@ -13415,7 +13344,6 @@ karetką
 karetkę
 karev
 kariera
-karierowicz
 kariery
 karierze
 karierą
@@ -13595,7 +13523,6 @@ kawalerem
 kawaleria
 kawalerii
 kawalerię
-kawalerka
 kawalerski
 kawalerskim
 kawalerów
@@ -13789,7 +13716,6 @@ kicha
 kici
 kicia
 kiciu
-kicksy
 kid
 kid cudi
 kid cudii
@@ -14022,7 +13948,6 @@ klausa
 klaustrofobię
 klauzula
 klauzulę
-klawiatura
 klawiaturze
 klawisz
 klawisze
@@ -14087,7 +14012,6 @@ klonów
 klopoty
 klopsiki
 klorel
-kloszard
 klown
 klub
 klubach
@@ -14266,7 +14190,6 @@ kokosów
 kokpitu
 koks
 koksem
-koksu
 koktajl
 koktajle
 koktajli
@@ -14571,7 +14494,6 @@ kondom
 kondoma
 kondomy
 kondomów
-kondycja
 kondycji
 kondycję
 koneksje
@@ -14836,12 +14758,10 @@ korony
 koronę
 koror
 korozja
-korpo
 korporacja
 korporacje
 korporacji
 korporację
-korposzczur
 korpus
 korpusie
 korpusu
@@ -14879,7 +14799,6 @@ korzystne
 korzyści
 korzyścią
 korzyść
-kosa
 kosi
 kosii
 kosiowie
@@ -15137,7 +15056,6 @@ kraju
 krajów
 krakersy
 krakersów
-krakus
 kraków
 krakówa
 krakówem
@@ -16188,9 +16106,6 @@ lange
 langley
 langston
 lanie
-lans
-lanser
-lansować sie
 lany
 lanę
 lao
@@ -16463,7 +16378,6 @@ lekkomyślne
 lekkomyślnie
 lekkomyślny
 lekką
-lekoman
 lektura
 leku
 leków
@@ -16875,7 +16789,6 @@ lodówce
 lodówka
 lodówki
 lodówkę
-loga
 logan
 logana
 logic
@@ -17456,7 +17369,6 @@ maine
 mainframe
 maj
 maja
-majk
 majonez
 majonezu
 major
@@ -17852,7 +17764,6 @@ martwymi
 martwą
 marty
 maru
-maruda
 marudzić
 marudź
 marv
@@ -18236,7 +18147,6 @@ medalion
 medalu
 media
 mediach
-medialność
 mediami
 medical
 medina
@@ -18331,8 +18241,6 @@ meksyky
 mel
 melancholic
 melanie
-melanz
-melanż
 melbourne
 melbournei
 melbourneowie
@@ -18367,14 +18275,11 @@ men
 menadżer
 menadżera
 menadżerem
-menda
 mendez
 mendoza
-mendzie
 menedżer
 menedżera
 menedżerem
-menel
 ment
 menta
 mentalnie
@@ -18461,7 +18366,6 @@ method manowi
 method manowie
 method manu
 method many
-metka
 metod
 metoda
 metodami
@@ -18930,7 +18834,6 @@ miranda
 mirando
 mirandy
 mirandę
-miras
 miriam
 misce
 miseczki
@@ -20976,8 +20879,6 @@ nawigacja
 nawigacji
 nawija
 nawijaj
-nawijać
-nawijka
 nawiązaliśmy
 nawiązanie
 nawiązać
@@ -21127,7 +21028,6 @@ neoo
 neptun
 neptuna
 neptune
-nerd
 nerek
 nerka
 nerki
@@ -21360,7 +21260,6 @@ nieee
 nieeee
 nieetyczne
 niefajnie
-niefart
 niefortunne
 niefortunny
 niegdyś
@@ -21682,7 +21581,6 @@ nieudane
 nieudany
 nieudolni
 nieugięty
-nieuk
 nieumyślne
 nieumyślnie
 nieunikniona
@@ -22153,12 +22051,10 @@ nowiny
 nowinę
 nowiutki
 nowo
-nowobogacki
 nowoczesna
 nowoczesne
 nowoczesnego
 nowoczesnej
-nowoczesność
 nowoczesny
 nowoczesnych
 nowoczesnym
@@ -25049,7 +24945,6 @@ ouch
 oui
 our
 out
-outfit
 outro
 over
 overwatch
@@ -25227,7 +25122,6 @@ paczką
 paczkę
 pada
 padają
-padalec
 padam
 padać
 padał
@@ -25256,7 +25150,6 @@ pająk
 pająka
 pająki
 pająków
-paker
 paki
 pakiecie
 pakiet
@@ -25679,7 +25572,6 @@ pat
 pata
 patch
 patchu
-patek
 patel
 patelni
 patelnię
@@ -25687,13 +25579,9 @@ patencie
 patent
 patio
 patmore
-pato
-patol
-patola
 patoli
 patolog
 patologa
-patologia
 patoriku
 patrice
 patricia
@@ -26667,7 +26555,6 @@ platformie
 platformy
 platformę
 platt
-platyna
 play
 playboi carti
 playboi cartii
@@ -26714,7 +26601,6 @@ plik
 pliki
 pliku
 plików
-plny
 plony
 plotek
 plotka
@@ -27998,7 +27884,6 @@ policzymy
 policzyć
 policzyłem
 policzę
-poligon
 polio
 polisa
 polish
@@ -29083,7 +28968,6 @@ potrącony
 potter
 pottera
 potu
-potupaja
 potwierdza
 potwierdzają
 potwierdzam
@@ -29525,7 +29409,6 @@ poznaliśmy
 poznam
 poznamy
 poznania
-poznaniak
 poznanie
 poznaniu
 poznasz
@@ -30041,7 +29924,6 @@ prawego
 prawej
 prawem
 prawi
-prawiczek
 prawiczkiem
 prawidłowa
 prawidłowe
@@ -30253,7 +30135,6 @@ program
 programach
 programem
 programie
-programista
 programu
 programy
 programów
@@ -32736,7 +32617,6 @@ puśćcie
 pycha
 pychota
 pyle
-pyra
 pysk
 pyska
 pyskaty
@@ -33291,7 +33171,6 @@ ranią
 ranić
 ranka
 rankiem
-ranking
 rankingu
 ranna
 ranne
@@ -33317,7 +33196,6 @@ raportem
 raportu
 raporty
 raportów
-rapować
 raptem
 rapu
 raquel
@@ -33739,7 +33617,6 @@ rewanżu
 rewelacja
 rewelacyjnie
 rewelacyjny
-rewir
 rewizji
 rewolucja
 rewolucji
@@ -34103,7 +33980,6 @@ rolach
 roland
 rolanda
 role
-roleks
 rolex
 rolf
 roli
@@ -34926,7 +34802,6 @@ rygorze
 ryj
 ryja
 ryk
-rym
 rymie
 rymuje
 rymy
@@ -35655,7 +35530,6 @@ seattle
 sebastian
 sebastiana
 sebastianie
-sebix
 sec
 secesyjnej
 second
@@ -36767,7 +36641,6 @@ smarki smarkowi
 smarki smarkowie
 smarki smarku
 smarki smarky
-smartfon
 smash
 smażone
 smażonego
@@ -36840,10 +36713,7 @@ snajperzy
 snajperów
 snake
 snami
-snapchat
-sneakersy
 snem
-snob
 snom
 snoop
 snoop dogg
@@ -36883,7 +36753,6 @@ sobowtór
 sobowtóra
 sobą
 soccer
-social media
 society
 socjalny
 socjalnym
@@ -36958,7 +36827,6 @@ solis
 solo
 solomon
 solucja
-solówka
 solą
 somalii
 some
@@ -37640,7 +37508,6 @@ sprowokować
 sprośne
 sprośny
 spryciarz
-spryt
 sprytna
 sprytne
 sprytni
@@ -38180,12 +38047,10 @@ statkiem
 statku
 statków
 statua
-statuetka
 status
 statusu
 statystycznie
 statystyk
-statystyka
 statystyki
 stavros
 staw
@@ -38513,7 +38378,6 @@ strażników
 straży
 strażą
 stream
-streamer
 street
 stref
 strefa
@@ -38571,7 +38435,6 @@ strumienie
 strumieniem
 strumieniu
 strumień
-strumyk
 strun
 struny
 strych
@@ -38634,7 +38497,6 @@ strzeliła
 strzeliłem
 strzeliłeś
 strzeliło
-strzelnica
 strzelnicy
 strzelnicę
 strzelę
@@ -38772,7 +38634,6 @@ style
 stylem
 styles
 stylu
-stylówa
 stypendium
 stój
 stójcie
@@ -38959,7 +38820,6 @@ sułtan
 sułtana
 suń
 sven
-swag
 swan
 swanson
 swat
@@ -39567,8 +39427,6 @@ szpaku
 szpakui
 szpakuowie
 szpakuy
-szpan
-szpaner
 szpiedzy
 szpieg
 szpiega
@@ -39599,7 +39457,6 @@ szpitalnej
 szpitalnym
 szpitalu
 szpony
-szron
 sztab
 sztabie
 sztabu
@@ -39653,7 +39510,6 @@ szuflada
 szuflady
 szufladzie
 szufladę
-szuja
 szuka
 szukacie
 szukaj
@@ -40309,7 +40165,6 @@ tarnówy
 taro
 tartaku
 tary
-taryfa
 taryfę
 tarzan
 tarą
@@ -40750,8 +40605,6 @@ tiger
 tijuana
 tik
 tiki
-tiktok
-tiktoker
 till
 tillman
 tim
@@ -40865,7 +40718,6 @@ tokyoy
 tokyu
 told
 toledo
-tolerancja
 tolerancji
 tolerować
 tolerował
@@ -40942,7 +40794,6 @@ top
 topher
 topi
 topie
-topka
 topless
 topór
 tor
@@ -41081,7 +40932,6 @@ tracisz
 tracić
 tracił
 traciła
-tracklista
 tracków
 tracy
 tracą
@@ -41570,7 +41420,6 @@ tuńczyk
 tuńczyka
 tuńczykiem
 tuż
-tv
 twa
 twain
 twarda
@@ -41752,7 +41601,6 @@ tysiącami
 tysiące
 tysiącem
 tysiąclecia
-tysiąclecie
 tysięcy
 tyson
 tysona
@@ -41797,7 +41645,6 @@ tęczy
 tęczę
 tędy
 tępa
-tępak
 tępe
 tępy
 tępym
@@ -41862,7 +41709,6 @@ tłuszczem
 tłuszczu
 tłuściochu
 ubaw
-uber
 ubezpieczenia
 ubezpieczenie
 ubezpieczeniem
@@ -43086,7 +42932,6 @@ ustawił
 ustawiła
 ustawiłem
 ustawiłeś
-ustawka
 ustawy
 ustawą
 ustawę
@@ -43880,9 +43725,7 @@ warstwy
 warstwą
 warstwę
 warszawa
-warszawiak
 warszawie
-warszawka
 warszawo
 warszawy
 warszawą
@@ -44075,7 +43918,6 @@ wciąz
 wciąż
 wciśniesz
 wciśnij
-wczasy
 wczesna
 wczesne
 wczesnego
@@ -44232,7 +44074,6 @@ wesela
 wesele
 weselej
 weselem
-weselisko
 weselne
 weselny
 weselu
@@ -44385,7 +44226,6 @@ wiatru
 wiatry
 wiatrów
 wiać
-wibe
 wibracje
 wibracji
 wibrator
@@ -44864,7 +44704,6 @@ witch
 with
 without
 wiwat
-wixa
 wiz khalifa
 wiz khalifie
 wiz khalifo
@@ -45815,7 +45654,6 @@ wstępnych
 wstępną
 wstępu
 wsypał
-wsza
 wszak
 wszcząć
 wsze
@@ -46376,7 +46214,6 @@ wygrałem
 wygrałeś
 wygrało
 wygrały
-wygryw
 wygrywa
 wygrywają
 wygrywam
@@ -47636,7 +47473,6 @@ wyłączyłeś
 wyłączę
 wyście
 wyścig
-wyścig szczurów
 wyścigach
 wyścigi
 wyścigiem
@@ -48152,7 +47988,6 @@ younga
 your
 yourself
 youtube
-youtuber
 yuan
 yuki
 yul
@@ -50488,7 +50323,6 @@ zbierzemy
 zbierzesz
 zbierzmy
 zbije
-zbiorkom
 zbiornik
 zbiornika
 zbiorniki
@@ -51755,7 +51589,6 @@ znajoma
 znajome
 znajomego
 znajomej
-znajomek
 znajomi
 znajomo
 znajomości
@@ -52097,7 +51930,6 @@ zostańcie
 zostańmy
 zowąd
 zoya
-zołza
 zrani
 zranienia
 zranienie
@@ -52240,7 +52072,6 @@ zrzucę
 zrzut
 zrzutu
 zrzuć
-zrzęda
 zrzędliwy
 zrzędzić
 zrób
@@ -52466,7 +52297,6 @@ zwracasz
 zwracać
 zwracał
 zwrot
-zwrotka
 zwrotki
 zwrotny
 zwrotu
@@ -52668,7 +52498,6 @@ złoty
 złotych
 złotym
 złotymi
-złotówki
 złotą
 złowieszczy
 złowić
@@ -53773,13 +53602,11 @@ zżyci
 żreć
 żryj
 żucia
-żul
 żuć
 żwawo
 życia
 życiach
 życie
-życie.
 życiem
 życiorys
 życiowa
