@@ -119,6 +119,7 @@ class WordSuggestion(BaseModel):
     word: str
     grade: str
     score: float
+    flags: List[str] = []
 
 class VerseSuggestion(BaseModel):
     line: str
@@ -197,7 +198,6 @@ async def generate_rhymes(request: GenerationRequest):
     print(f"🔍 '{text}' → word='{target_word}' tail='{target_entry.tail_d2}' mode={'word' if is_single_word else 'verse'}")
 
     if is_single_word:
-        raw_results = ENGINE.find_candidates(target_word)
         # Apply prioritization scores
         processed = []
         for word, grade, base_score in raw_results:
@@ -205,17 +205,25 @@ async def generate_rhymes(request: GenerationRequest):
                 continue
             
             # Boost score based on our quality mapping
-            priority = WORD_SCORES.get(word, 0.5)
+            meta = WORD_SCORES.get(word, {})
+            # Handle both old float format (if any legacy cache) and new dict format
+            if isinstance(meta, float):
+                priority = meta
+                flags = []
+            else:
+                priority = meta.get("s", 0.5)
+                flags = meta.get("f", [])
+
             final_score = base_score * priority
-            processed.append((word, grade, final_score))
+            processed.append((word, grade, final_score, flags))
             
         # Sort by grade first, then by the boosted score
         processed.sort(key=lambda x: (x[1] != "PERFECT", x[1] != "DOMINANT", -x[2]))
 
         payload = {"PERFECT": [], "DOMINANT": [], "NEAR": []}
-        for word, grade, score in processed:
-            if len(payload[grade]) < 10:
-                payload[grade].append(WordSuggestion(word=word, grade=grade, score=score))
+        for word, grade, score, flags in processed:
+            if len(payload[grade]) < 15: # Increased limit slightly to show variety
+                payload[grade].append(WordSuggestion(word=word, grade=grade, score=score, flags=flags))
         
         return GenerationResponse(
             mode="word", original_word=target_word,

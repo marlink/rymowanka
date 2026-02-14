@@ -1,4 +1,5 @@
 import re
+import os
 from collections import Counter
 
 def process():
@@ -42,30 +43,94 @@ def process():
     # 4. Filter out some obvious junk if needed (non-polish letters were already handled in findall)
     # But freq_words might have some foreign words.
     
-    # 5. Sort
+    # 3. Load Vulgar words
+    vulgar_words = set()
+    try:
+        with open(os.path.join("data", "vulgar.txt"), "r", encoding="utf-8") as f:
+            for line in f:
+                w = line.strip().lower()
+                if w: vulgar_words.add(w)
+    except FileNotFoundError:
+        print("data/vulgar.txt not found")
+
+    # 4. Load Entities
+    # Format: Name|Inflection1,Inflection2|tag
+    entity_map = {} # word -> {"tag": tag, "base": base_name}
+    try:
+        with open(os.path.join("data", "entities.txt"), "r", encoding="utf-8") as f:
+            for line in f:
+                parts = line.strip().split("|")
+                if len(parts) >= 3:
+                    base_name = parts[0]
+                    inflections = parts[1].split(",")
+                    tag = parts[2]
+                    
+                    # Add base name parts if single word
+                    if " " not in base_name:
+                         w = base_name.lower()
+                         entity_map[w] = {"tag": tag, "base": base_name}
+                    
+                    # Add inflections
+                    for infl in inflections:
+                        w = infl.strip().lower()
+                        if w:
+                            entity_map[w] = {"tag": tag, "base": base_name}
+    except FileNotFoundError:
+        print("data/entities.txt not found")
+
+    # 5. Combine everything
+    # 50k freq + lyrics + vulgar + entities
+    combined = set(freq_words) | lyrics_words | vulgar_words | set(entity_map.keys())
+    
+    # 6. Sort
     sorted_words = sorted(list(combined))
     
     with open("words_pl.txt", "w", encoding="utf-8") as f:
         for w in sorted_words:
             f.write(w + "\n")
 
-    # 6. Create scores mapping
-    # 0.5 base, 1.0 if high freq, 2.0 if in lyrics
-    scores = {}
+    # 7. Create scores & metadata mapping
+    # Schema: "word": {"score": float, "flags": [str]}
+    metadata = {}
     lyrics_set = set(lyrics_words)
     freq_set = set(freq_words[:15000]) # top 15k are "high freq"
     
     for w in sorted_words:
         score = 0.5
+        flags = []
+        
+        # Base scoring
         if w in freq_set: score += 0.5
         if w in lyrics_set: score += 1.0
-        scores[w] = score
+        
+        # Entity logic
+        if w in entity_map:
+            ent = entity_map[w]
+            score += 2.0 # Huge boost for matching an entity
+            flags.append("entity")
+            flags.append(ent["tag"]) # e.g. "rapper", "city"
+            
+        # Vulgar logic
+        if w in vulgar_words:
+            # Maybe slight boost to ensure they appear if requested, but not too high
+            # Actually user said "highlight", not "hide".
+            # Let's give them good visibility.
+            if score < 1.0: score = 1.0
+            flags.append("vulgar")
+
+        # Save compact if interesting, else just score
+        # For backward compatibility or size, we can just save the dict object
+        match_data = {"s": round(score, 2)}
+        if flags:
+            match_data["f"] = flags
+        
+        metadata[w] = match_data
 
     import json
     with open("word_scores.json", "w", encoding="utf-8") as f:
-        json.dump(scores, f)
+        json.dump(metadata, f)
             
-    print(f"Vocab updated: {len(sorted_words)} words. Scores saved.")
+    print(f"Vocab updated: {len(sorted_words)} words. Metadata saved.")
 
 if __name__ == "__main__":
     process()
