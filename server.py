@@ -198,6 +198,7 @@ async def generate_rhymes(request: GenerationRequest):
     print(f"🔍 '{text}' → word='{target_word}' tail='{target_entry.tail_d2}' mode={'word' if is_single_word else 'verse'}")
 
     if is_single_word:
+        raw_results = ENGINE.find_candidates(target_word)
         # Apply prioritization scores
         processed = []
         for word, grade, base_score in raw_results:
